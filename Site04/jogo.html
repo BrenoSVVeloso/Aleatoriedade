@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jogo da Velha</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                //Validacao do preenchimento
+
+                $("#btn_comecar").click(function(){
+                    var jog1 = $("input[name=jogador1]").val();
+                    var jog2 = $("input[name=jogador2]").val();
+
+
+                    if(jog1.trim().length > 0 && 
+                        jog2.trim().length > 0){
+                        //Comecar jogo
+                        ComecarJogo();
+                    }else{
+                        alert("Nome(s) não preenchido(s)");
+                    }
+                });
+            });
+
+            function ComecarJogo(){
+                var contadorCLicks = 0;
+
+                $("table td").click(function(){
+                    contadorCLicks++;
+
+                    if(contadorCLicks <= 9){
+                        if(contadorCLicks%2 == 0){
+                            //par
+                            $(this).text("O");
+                        }else{
+                            //impar
+                            $(this).text("X");
+                        }
+                        if(VerificarGanhador()){
+                            contadorCLicks = 9;
+                        }
+                        if(contadorCLicks == 9){
+                            $("#msg").text("Jogo encerrado");
+                        }
+                    }
+                });
+            }
+            function VerificarGanhador(){
+                var vencedor = [
+                    //colunas
+                    [0,1,2],
+                    [3,4,5],
+                    [6,7,8],
+                    //linhas
+                    [0,3,6],
+                    [1,4,7],
+                    [2,5,8],
+                    //diagonais
+                    [0,4,8],
+                    [6,4,2]
+                ];
+
+                
+            }
+        </script>
+    </head>
+    <body>
+
+        <div class="configurador">
+            <span>X</span><input type="text" name="jogador1" placeholder="Nome do jogador #1"/>
+            x
+            <input type="text" name="jogador2" placeholder="Nome do jogador #2"/><span>O</span>
+            <br/>
+            <br/>
+            <button id="btn_comecar">Começar Jogo</button>
+            <br/>
+            <div id="msg"></div>
+        </div>
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+
+
+        <!--<h3>Salario</h3>
+            <table>
+                <tr>
+                    <td rowspan="2">Jose</td>
+                    <td>R$3.000,00</td>
+                    <td rowspan="2">R$5.000,00</td>
+                </tr>
+                <tr>
+                    <td>R$2.000,00</td>
+                </tr>
+                <tr>
+                    <td>Maria</td>
+                    <td rowspan="2">R$3.000,00</td>
+                </tr>
+            </table>
+        -->
+    </body>
+</html>
